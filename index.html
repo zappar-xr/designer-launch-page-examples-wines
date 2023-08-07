@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,minimal-ui" />
+
+	<title>Box Wines</title>
+
+	<link rel="icon" type="image/png" href="assets/favicon.png" />
+	<link rel="stylesheet" href="styles.css">
+
+	<!-- Do not remove the following scripts -->
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src="https://libs.zappar.com/jute/16.4/index.js"></script>
+</head>
+<body>
+	<div id="splash-page">
+		<div class="inner-wrapper">
+			<!-- This is the launch button and text -->
+			<div class="launch-button-container">
+				<div id="launch-button-text">
+					<img src="./assets/img/boxwines.png" width="393" height="420" alt="Box Wines" />
+				</div>
+				<button id="launch-button">
+					Launch now
+				</button>
+				<div class="qr-container">
+					<h1>Almost there...</h1>
+					<p>Use your phone’s camera to <b>scan the QR code</b>.</p>
+					<img src="./assets/img/qr-code.png" width="125" height="125" alt="Box Wines experience QR code">
+				</div>
+			</div>
+	
+			<!-- This is a loading spinner -->
+			<div id="loading-spinner">
+				<div class="sk-fading-circle">
+					<div class="sk-circle1 sk-circle"></div>
+					<div class="sk-circle2 sk-circle"></div>
+					<div class="sk-circle3 sk-circle"></div>
+					<div class="sk-circle4 sk-circle"></div>
+					<div class="sk-circle5 sk-circle"></div>
+					<div class="sk-circle6 sk-circle"></div>
+					<div class="sk-circle7 sk-circle"></div>
+					<div class="sk-circle8 sk-circle"></div>
+					<div class="sk-circle9 sk-circle"></div>
+					<div class="sk-circle10 sk-circle"></div>
+					<div class="sk-circle11 sk-circle"></div>
+					<div class="sk-circle12 sk-circle"></div>
+				</div>
+			</div>
+	
+			<!-- This is loading helper texts -->
+			<div id="loading-helper">
+				<div id="loading-helper-1">
+					<div class="loading-helper-title" id="loading-helper-1-title">
+						Loading...
+					</div>
+					<span id="loading-helper-1-body">
+						It may take a few moments to load the experience over your
+						connection.
+					</span>
+				</div>
+				<div id="loading-helper-2">
+					<div class="loading-helper-title" id="loading-helper-2-title">
+						Still Loading...
+					</div>
+					<span id="loading-helper-2-body">
+						Please check you have a good Wi-Fi or mobile data connection.
+					</span>
+				</div>
+			</div>
+	
+			<!-- This is where you can add your own cookie and privacy policies -->
+			<div id="cookie-notice">
+				<span id="cookie-title">Cookies</span>
+				<span id="cookie-body">
+					Once you tap Launch, we'll use cookies to enable operation of the
+					site, and to measure usage and engagement.
+				</span>
+			</div>
+	
+			<div id="privacy">
+				<a id="privacy-text" href="https://www.zappar.com/privacy/" target="_blank" rel="noopener noreferrer">
+					Privacy Policy
+				</a>
+				<span> | </span>
+				<a id="launch-button-only-essential">
+					Launch w/o Analytics Cookies
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	const launchButton = document.getElementById("launch-button");
+	const launchButtonOnlyEssential = document.getElementById("launch-button-only-essential");
+	const launchButtonText = document.getElementById("launch-button-text");
+	const splashDiv = document.getElementById("splash-page");
+
+	let hasLoaded = false;
+	let onlyEssentialCookies = false;
+
+	launchButtonOnlyEssential.addEventListener("click", function() {
+		// If you use your own analytics tool, Handle launching without analytics cookies
+		onlyEssentialCookies = true;
+		launchButton.click();
+	});
+
+	Jute.init({
+		launchButton: launchButton,
+		onLoading: function() {
+			// Called once the used clicks the launch button
+
+			// Initiate your analytics tool here (eg. Google Analytics)
+			// If you do use an analytics tool, please consider the onlyEssentialCookies boolean value
+
+			splashDiv.classList.add("loading");
+			setTimeout(function() {
+				if (!hasLoaded) splashDiv.classList.add("loading-helper-1")
+			}, 7500);
+			setTimeout(function() {
+				if (!hasLoaded) splashDiv.classList.add("loading-helper-2")
+			}, 20000);
+		},
+		onLoaded: function() {
+			// Called once the runtime (Jute) is loaded
+			splashDiv.remove();
+			hasLoaded = true;
+		},
+		onUnsupported: function() {
+			// Handle unsupported browsers
+			splashDiv.remove();
+		},
+		// A Boolean value indicating whether using only essential cookies or not
+		onlyEssentialCookies: onlyEssentialCookies
+	});
+	</script>
+</body>
+</html>
