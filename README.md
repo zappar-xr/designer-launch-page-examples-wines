@@ -4,7 +4,7 @@ This repository contains an AR example with a custom launch page, built with [Za
 
 ## Preview
 
-Try this example yourself [here]({{ EXAMPLE_LINK }}) or scan the following QR code:
+Try this example yourself [here](https://zappar-xr.github.io/designer-launch-page-examples-wines/) or scan the following QR code:
 
 ![Preview QR Code"](preview-qr-code.png)
 
